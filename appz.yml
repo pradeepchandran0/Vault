@@ -1,35 +1,29 @@
 app:
     name: Vault
     code: VAULT
-    notify: pchandran@cloudbourne.co
-
+    notify: appzdev@cloudbourne.co
 build:
     version: 0.4
     env: DEV
     build_file: none
     output_files: output/*.zip
     image_template: vault-1.2
-
+    image_name: myco/vault
 deploy:
     context: myco/DEV
-    type: statefulset
     replicas: 1
-    ingress: none
     port:
-    - 8200
     - 80
-
+    - 8200
 volumes:
   - claim: vault-home
     mount: /appz/home
     name: home
-    size: 5Gi
   - claim: vault-data
     mount: /appz/data
     name: data
-    size: 5Gi
-
+monitor:
+    notify: appzops@cloudbourne.co      
 properties:
-    revision: 25
-    ENABLE_AUTO_PASSWORD: True
+    revision : 25
     
